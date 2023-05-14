@@ -1,0 +1,81 @@
+///$tab Main data
+Mapping 
+Regions_map:
+LOAD * INLINE [
+    F1, F2
+    Астана, г.Астана
+    Алматы, г.Алматы
+    Шымкент, г.Шымкент
+    Г.АСТАНА, г.Астана
+    Г.АЛМАТЫ, г.Алматы
+    Г.ШЫМКЕНТ, г.Шымкент
+];
+
+
+Mapping 
+Regions_source:
+LOAD * INLINE [
+    F1, F2
+    г. Нур-Султан, г.Астана
+    г.Нур-Султан, г.Астана
+    г. Алматы, г.Алматы
+    г. Шымкент, г.Шымкент,
+    А, Жамбылская
+];
+
+
+Transfer:
+LOAD
+    ApplyMap('Regions_source', Регион) as Регион,
+    Годы,
+    "Объем отгруженной продукции" / 1000 as "Объем отгруженной продукции",
+    ApplyMap('Regions_source', "Область отгрузки") as "Область отгрузки"
+FROM [lib://Data/ПРОМ для ДАШБ upd.xlsx]
+(ooxml, embedded labels, header is 1 lines, table is отгрузка);
+
+Left Join (Transfer)
+Load 
+	"Область отгрузки" as Регион,
+    Регион as "Область отгрузки",
+    Годы,
+    Sum("Объем отгруженной продукции") as [Объем полученной продукции] 
+Resident Transfer
+Group By "Область отгрузки", Регион, Годы;
+
+Map:
+LOAD
+    ApplyMap('Regions_map', "Карта КЗ 2021.Name") as Регион,
+    "Карта КЗ 2021.Area" as geoArea
+FROM [lib://Data/Карта КЗ 2021.kml]
+(kml, Table is [Карта КЗ_old (4).kml]);
+
+Map_point:
+LOAD
+    ApplyMap('Regions_map', Subfield("Для переписи.Name", ' ', 1)) as [Регион],
+    "Для переписи.Point" as geoPoint
+FROM [lib://Data/БНС/Для переписи.kml]
+(kml, Table is [Для переписи/ОбластиРК])
+Where Len("Для переписи.Point") > 0;
+
+Outer Join (Map_point)
+Load
+	Регион, 
+    Mid(geoArea, 4, Index(geoArea, ',', 2) - 4 ) as geoPoint
+Resident Map
+Where Left(Регион, 1) = 'г';
+
+Concatenate (Map)
+Load
+	Регион,
+    geoPoint
+Resident Map_point;
+
+Drop Table Map_point;
+
+
+Map_point_to:
+Load 
+	Регион as "Область отгрузки",
+    geoArea as geoAreaTo,
+    geoPoint as geoPointTo
+Resident Map;

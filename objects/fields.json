@@ -1,0 +1,96 @@
+[
+  {
+    "qName": "geoArea",
+    "qTags": [
+      "$wgs84",
+      "$geomultipolygon",
+      "$text",
+      "$ascii"
+    ],
+    "qSrcTables": [
+      "Map"
+    ]
+  },
+  {
+    "qName": "geoAreaTo",
+    "qTags": [
+      "$text",
+      "$ascii"
+    ],
+    "qSrcTables": [
+      "Map_point_to"
+    ]
+  },
+  {
+    "qName": "geoPoint",
+    "qTags": [
+      "$wgs84",
+      "$geopoint",
+      "$text",
+      "$ascii"
+    ],
+    "qSrcTables": [
+      "Map"
+    ]
+  },
+  {
+    "qName": "geoPointTo",
+    "qTags": [
+      "$text",
+      "$ascii"
+    ],
+    "qSrcTables": [
+      "Map_point_to"
+    ]
+  },
+  {
+    "qName": "Годы",
+    "qTags": [
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "Transfer"
+    ]
+  },
+  {
+    "qName": "Область отгрузки",
+    "qTags": [
+      "$key",
+      "$text"
+    ],
+    "qSrcTables": [
+      "Transfer",
+      "Map_point_to"
+    ]
+  },
+  {
+    "qName": "Объем отгруженной продукции",
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "Transfer"
+    ]
+  },
+  {
+    "qName": "Объем полученной продукции",
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "Transfer"
+    ]
+  },
+  {
+    "qName": "Регион",
+    "qTags": [
+      "$key",
+      "$text"
+    ],
+    "qSrcTables": [
+      "Transfer",
+      "Map"
+    ]
+  }
+]

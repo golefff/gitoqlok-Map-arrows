@@ -1,0 +1,24 @@
+{
+  "qInfo": {
+    "qId": "KZtHAu",
+    "qType": "dimension"
+  },
+  "qDim": {
+    "qGrouping": "H",
+    "qFieldDefs": [
+      "Регион",
+      "Область отгрузки"
+    ],
+    "qFieldLabels": [],
+    "title": "Регионы",
+    "coloring": {
+      "changeHash": "0.6789660975707199",
+      "hasValueColors": false
+    }
+  },
+  "qMetaDef": {
+    "title": "Регионы",
+    "description": "",
+    "tags": []
+  }
+}

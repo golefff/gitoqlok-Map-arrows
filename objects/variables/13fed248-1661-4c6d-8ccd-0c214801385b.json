@@ -1,0 +1,15 @@
+{
+  "qInfo": {
+    "qId": "13fed248-1661-4c6d-8ccd-0c214801385b",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "переменная",
+  "qComment": "1",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "tags": []
+}
